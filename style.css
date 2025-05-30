@@ -17,27 +17,28 @@ body {
   line-height: 1.5;
   color: var(--light);
   background: var(--dark);
-
-  /* NEW: turn the page into a vertical flex stack */
   display: flex;
   flex-direction: column;
 }
 
-main {                       /* grows to fill spare space */
+main {
   flex: 1 0 auto;
   max-width: var(--max-width);
-  margin: .5rem auto 3rem;
+
+  /* was: margin: .5rem 1rem 3rem; */
+  margin: .5rem auto 3rem;   /* auto L/R recentres <main> */
+
   padding: 0 1rem;
 }
 
-footer {                     /* never collapses */
+footer {                   
   flex-shrink: 0;
 }
 
 /* ─── Header ─────────────────────────── */
 header {
   background: linear-gradient(135deg, #041734, #102863 60%, #143c9d);
-  padding: 1rem 1rem 1rem;
+  padding: 1rem 1rem 0.5rem;
   text-align: center;
 }
 
@@ -84,8 +85,9 @@ section { margin-top: 4rem; }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, 600px);
   gap: 1.5rem;
+  justify-content: center; 
 }
 
 .card {
