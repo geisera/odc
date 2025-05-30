@@ -26,7 +26,7 @@ body {
 main {                       /* grows to fill spare space */
   flex: 1 0 auto;
   max-width: var(--max-width);
-  margin: 4rem auto 3rem;
+  margin: .5rem auto 3rem;
   padding: 0 1rem;
 }
 
@@ -85,7 +85,7 @@ section { margin-top: 4rem; }
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: .5rem;
+  gap: 1.5rem;
 }
 
 .card {
