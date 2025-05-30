@@ -6,16 +6,35 @@
   --max-width: 1200px;
 }
 
+/* ── Global Reset ───────────────────── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Sticky‑footer Flex Layout ───────── */
+html, body { height: 100%; }
 
 body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
   color: var(--light);
   background: var(--dark);
+
+  /* NEW: turn the page into a vertical flex stack */
+  display: flex;
+  flex-direction: column;
 }
 
-/* ─── Layout ─────────────────────────── */
+main {                       /* grows to fill spare space */
+  flex: 1 0 auto;
+  max-width: var(--max-width);
+  margin: 4rem auto 3rem;
+  padding: 0 1rem;
+}
+
+footer {                     /* never collapses */
+  flex-shrink: 0;
+}
+
+/* ─── Header ─────────────────────────── */
 header {
   background: linear-gradient(135deg, #041734, #102863 60%, #143c9d);
   padding: 1rem 1rem 1rem;
@@ -31,16 +50,16 @@ header h1 {
 header h2 {
   font-family: 'Oxanium', sans-serif;
   font-size: clamp(1.4rem, 3.2vw, 2.25rem);
-  font-weight: 400; 
+  font-weight: 400;
   letter-spacing: .02em;
   margin-top: 0.75rem;
   color: var(--light);
 }
 
-header p { 
-    font-size: 1.125rem; 
-    margin-top: 1rem; 
-    opacity: .85; 
+header p {
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  opacity: .85;
 }
 
 nav {
@@ -60,18 +79,13 @@ nav a {
 
 nav a:hover { color: var(--accent); }
 
-main {
-  max-width: var(--max-width);
-  margin: 4rem auto 3rem;
-  padding: 0 1rem;
-}
-
+/* ─── Content ‑ Cards & Sections ────── */
 section { margin-top: 4rem; }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: .5rem;
 }
 
 .card {
@@ -82,21 +96,9 @@ section { margin-top: 4rem; }
   transition: transform .25s ease;
 }
 
-.card:hover { transform: translateY(-4px); }
-
-.card h3 { font-size: 1.25rem; margin-bottom: .5rem; color: var(--primary); }
-
-.card p { font-size: .95rem; opacity: .88; }
-
-/* ─── Reviews & Intel headings ───────── */
-#reviews h2,
-#intel   h2 { text-align: center; margin-bottom: 2rem; }
-
-.intro {
-  max-width: 700px;
-  margin: 0 auto 2.5rem;
-  text-align: center;
-}
+.card:hover   { transform: translateY(-4px); }
+.card h3      { font-size: 1.25rem; margin-bottom: .5rem; color: var(--primary); }
+.card p       { font-size: .95rem; opacity: .88; }
 
 /* ─── Signup ─────────────────────────── */
 #signup { text-align: center; }
