@@ -25,6 +25,7 @@ body {
 
 main {                       
   flex: 1 0 auto;
+   width: 100%;
   max-width: var(--max-width);
   margin: .5rem auto .5rem;
   padding: 0 1rem;
@@ -84,8 +85,8 @@ section { margin-top: 2rem; }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; /*******************************************************************************************************/
 }
 
 .card {
