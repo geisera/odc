@@ -1,0 +1,150 @@
+:root {
+  --primary: #1f60ff;
+  --dark:    #0d1117;
+  --light:   #f3f6ff;
+  --accent:  #ff4930;
+  --max-width: 1200px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  color: var(--light);
+  background: var(--dark);
+}
+
+/* ─── Layout ─────────────────────────── */
+header {
+  background: linear-gradient(135deg, #041734, #102863 60%, #143c9d);
+  padding: 1rem 1rem 1rem;
+  text-align: center;
+}
+
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  letter-spacing: .05em;
+}
+
+header h2 {
+  font-family: 'Oxanium', sans-serif;
+  font-size: clamp(1.4rem, 3.2vw, 2.25rem);
+  font-weight: 400; 
+  letter-spacing: .02em;
+  margin-top: 0.75rem;
+  color: var(--light);
+}
+
+header p { 
+    font-size: 1.125rem; 
+    margin-top: 1rem; 
+    opacity: .85; 
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--light);
+  font-weight: 700;
+  transition: color .2s ease;
+}
+
+nav a:hover { color: var(--accent); }
+
+main {
+  max-width: var(--max-width);
+  margin: 4rem auto 3rem;
+  padding: 0 1rem;
+}
+
+section { margin-top: 4rem; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: #131a25;
+  border-radius: 1rem;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
+  transition: transform .25s ease;
+}
+
+.card:hover { transform: translateY(-4px); }
+
+.card h3 { font-size: 1.25rem; margin-bottom: .5rem; color: var(--primary); }
+
+.card p { font-size: .95rem; opacity: .88; }
+
+/* ─── Reviews & Intel headings ───────── */
+#reviews h2,
+#intel   h2 { text-align: center; margin-bottom: 2rem; }
+
+.intro {
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+/* ─── Signup ─────────────────────────── */
+#signup { text-align: center; }
+
+#signup h2 { font-size: 2rem; margin-bottom: 1rem; }
+
+#signup form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+  margin-top: 1.25rem;
+}
+
+#signup input,
+#signup button {
+  padding: .75rem 1rem;
+  border: none;
+  border-radius: .5rem;
+  font-size: 1rem;
+}
+
+#signup input {
+  flex: 1 1 280px;
+  max-width: 380px;
+}
+
+#signup button {
+  background: var(--accent);
+  color: var(--light);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background .2s ease;
+}
+
+#signup button:hover { background: #ff2d0f; }
+
+/* ─── Footer ─────────────────────────── */
+footer {
+  background: #0b0e15;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: .875rem;
+  opacity: .7;
+}
+
+a.brand {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
