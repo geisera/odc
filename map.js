@@ -8,66 +8,120 @@ function mulberry32(seed){
   };
 }
 
-/* ---------- canvas & state ---------- */
+/* ---------- galaxy painter ---------- */
 const canvas = document.getElementById('galaxy');
-const ctx     = canvas.getContext('2d');
-const w       = canvas.width;
-const h       = canvas.height;
-const cx      = w / 2;
-const cy      = h / 2;
+const ctx = canvas.getContext('2d');
+const width = canvas.width;
+const height = canvas.height;
+const cx = width  / 2;
+const cy = height / 2;
 
-/* zoom / pan that survive redraws */
-let zoom    = 10;      // starts the same as before
+/* --- pan state & settings --- */
 let xOffset = 0;
 let yOffset = 0;
+let zoom = 100;
+const STEP  = 50;         // pixels moved per key‑press
 
-/* galaxy constants (don’t change on redraw) */
-const ARMS   = 2;
-const STARS  = 10_000;
-const TWIST  = 1.5;
-const SPREAD = 2.8;
+function drawGalaxy(zoom){
+  const rand = mulberry32(99);
 
-/* ---------- render ---------- */
-function drawGalaxy() {
   ctx.fillStyle = getComputedStyle(document.documentElement)
-                  .getPropertyValue('--bg');
-  ctx.fillRect(0, 0, w, h);
+                 .getPropertyValue('--bg');
+  ctx.fillRect(0, 0, width, height);
 
-  const rng   = mulberry32(0);                 // same galaxy every time
-  const maxR  = Math.min(w, h) * zoom;
+  const arms = 2;
+  const stars = 100000;
+  const spread = 2.8;
+  const twist = 1.5;
+  //let zoom = 10;
+  const maxR = Math.min(width, height) * zoom;
 
-  for (let i = 0; i < STARS; i++) {
-    const arm    = i % ARMS;
-    const t      = rng();                      // 0‑1 “depth”
-    const r      = t * maxR;
-    const baseA  = (arm / ARMS) * Math.PI * 2;
-    const angle  = baseA + t * TWIST * Math.PI * 2 + (rng() - 0.5) * SPREAD;
+  for (let i = 0; i < stars; i++){
+    const arm = i % arms;
+    const t = rand();
+    const r = t * maxR;
+    const baseA = (arm / arms) * 2 * Math.PI;
+    const angle = baseA + t * twist * 2 * Math.PI + (rand() - .5) * spread;
 
-    const x = (cx + xOffset) + r * Math.cos(angle);
-    const y = (cy + yOffset) + r * Math.sin(angle);
+    /* apply pan offsets */
+    const x = cx + r * Math.cos(angle) + xOffset;
+    const y = cy + r * Math.sin(angle) + yOffset;
 
-    const b = rng() * 255 | 0;
+    const b = rand() * 255 | 0;
     ctx.fillStyle = `rgb(${b},${b},255)`;
     ctx.fillRect(x, y, 1.5, 1.5);
   }
 }
 
-drawGalaxy();
-
-/* ---------- tap / click handler ---------- */
-canvas.addEventListener('pointerdown', e => {
-  const rect = canvas.getBoundingClientRect();
-  const sx   = e.clientX - rect.left;   // screen‑space tap
-  const sy   = e.clientY - rect.top;
-
-  /* world‑space coord under the finger before zoom */
-  const wx = (sx - (cx + xOffset)) / zoom;
-  const wy = (sy - (cy + yOffset)) / zoom;
-
-  /* zoom in and translate so the tapped spot stays put */
-  zoom *= 1.25;                          // tweak factor to taste
-  xOffset = sx - cx - wx * zoom;
-  yOffset = sy - cy - wy * zoom;
-
-  drawGalaxy();
+/* --- arrow‑key handling --- */
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp') {
+    ctx.fillStyle = 'black';
+    yOffset += STEP;
+    e.preventDefault();
+    drawGalaxy(zoom);
+  }
 });
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') {
+    ctx.fillStyle = 'black';
+    yOffset -= STEP;
+    e.preventDefault();
+    drawGalaxy(zoom);
+  }
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') {
+    ctx.fillStyle = 'black';
+    xOffset += STEP;
+    e.preventDefault();
+    drawGalaxy(zoom);
+  }
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') {
+    ctx.fillStyle = 'black';
+    xOffset -= STEP;
+    e.preventDefault();
+    drawGalaxy(zoom);
+  }
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === '+') {
+    ctx.fillStyle = 'black';
+    zoom += 1;
+    e.preventDefault();
+    drawGalaxy(zoom);
+  }
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === '-') {
+    ctx.fillStyle = 'black';
+    zoom -= 1;
+    e.preventDefault();
+    drawGalaxy(zoom);
+  }
+});
+
+// window.addEventListener('keydown', e => {
+//   ctx.fillStyle = 'black';
+//   switch (e.key) {
+//     case 'ArrowUp': yOffset += STEP; break;
+//     case 'ArrowDown': yOffset -= STEP; break;
+//     case 'ArrowLeft': xOffset += STEP; break;
+//     case 'ArrowRight': xOffset -= STEP; break;
+//     case '+': zoom += 1; break;
+//     case '-': zoom -= 1; break;
+//     default: return;          // ignore all other keys
+//   }
+//   console.log(`Key: ${e.key}, Zoom: ${zoom}, xOff: ${xOffset}, yOff: ${yOffset}`);
+//   e.preventDefault();         // stop page scroll
+//   drawGalaxy();
+// });
+
+drawGalaxy(zoom);
