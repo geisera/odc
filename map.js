@@ -19,21 +19,36 @@ const cy = height / 2;
 /* --- pan state & settings --- */
 let xOffset = 0;
 let yOffset = 0;
-let zoom = 100;
-const STEP  = 50;         // pixels moved per key‑press
+let zoom = 0.5;
+let STEP  = 0.1;
+let starData = [];
 
 function drawGalaxy(zoom){
   const rand = mulberry32(99);
 
-  ctx.fillStyle = getComputedStyle(document.documentElement)
-                 .getPropertyValue('--bg');
+  if ( zoom < 0 ){ 
+    zoom = 0.5 
+  } else if( zoom > 500 ){
+    zoom = 500
+  };
+
+   if ( zoom < 1 ){ 
+    STEP = 1 
+  } else if( zoom < 5 ){
+    STEP = 1
+  } else if( zoom < 10 ){
+    STEP = 10
+  } else if( zoom < 50 ){
+    STEP = 100
+  };
+
+  ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, width, height);
 
   const arms = 2;
-  const stars = 100000;
+  const stars = 10000;
   const spread = 2.8;
   const twist = 1.5;
-  //let zoom = 10;
   const maxR = Math.min(width, height) * zoom;
 
   for (let i = 0; i < stars; i++){
@@ -50,8 +65,12 @@ function drawGalaxy(zoom){
     const b = rand() * 255 | 0;
     ctx.fillStyle = `rgb(${b},${b},255)`;
     ctx.fillRect(x, y, 1.5, 1.5);
+    //starData.push({X: x, Y: y});
   }
+  console.log(`Zoom: ${zoom}`);
+  
 }
+//console.log(starData);
 
 /* --- arrow‑key handling --- */
 window.addEventListener('keydown', e => {
@@ -93,16 +112,16 @@ window.addEventListener('keydown', e => {
 window.addEventListener('keydown', e => {
   if (e.key === '+') {
     ctx.fillStyle = 'black';
-    zoom += 1;
+    zoom += STEP;
     e.preventDefault();
     drawGalaxy(zoom);
   }
 });
 
 window.addEventListener('keydown', e => {
-  if (e.key === '-') {
+  if (e.key === '-' && zoom > 10 ) {
     ctx.fillStyle = 'black';
-    zoom -= 1;
+    zoom -= STEP;
     e.preventDefault();
     drawGalaxy(zoom);
   }
