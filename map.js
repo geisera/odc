@@ -17,29 +17,82 @@ const cx = width  / 2;
 const cy = height / 2;
 
 /* --- pan state & settings --- */
+const zoomLevel = Object.freeze({
+    LEVEL_1: 0.5,
+    LEVEL_2: 1.5,
+    LEVEL_3: 15,
+    LEVEL_4: 150,
+    LEVEL_5: 1500
+});
+
 let xOffset = 0;
 let yOffset = 0;
-let zoom = 0.5;
+let zoom = zoomLevel.LEVEL_1;
 let STEP  = 0.1;
 let starData = [];
+let size = 1.0;
+
+// Increase zoom (if not already at max)
+function zoomIn() {
+  switch (zoom) {
+    case zoomLevel.LEVEL_1:
+      zoom = zoomLevel.LEVEL_2;
+      size = 1.5;
+      break;
+    case zoomLevel.LEVEL_2:
+      zoom = zoomLevel.LEVEL_3;
+      size = 3;
+      break;
+    case zoomLevel.LEVEL_3:
+      zoom = zoomLevel.LEVEL_4;
+      size = 5;
+      break;
+    case zoomLevel.LEVEL_4:
+      zoom = zoomLevel.LEVEL_5;
+      size = 20;
+      break;
+    // LEVEL_5 is max; no change
+  }
+  drawGalaxy(zoom);
+}
+
+// Decrease zoom (if not already at min)
+function zoomOut() {
+  switch (zoom) {
+    case zoomLevel.LEVEL_5:
+      zoom = zoomLevel.LEVEL_4;
+      size = 5;
+      break;
+    case zoomLevel.LEVEL_4:
+      zoom = zoomLevel.LEVEL_3;
+      size = 3;
+      break;
+    case zoomLevel.LEVEL_3:
+      zoom = zoomLevel.LEVEL_2;
+      size = 1.5;
+      break;
+    case zoomLevel.LEVEL_2:
+      zoom = zoomLevel.LEVEL_1;
+      size = 1;
+      break;
+    // LEVEL_1 is min; no change
+  }
+  drawGalaxy(zoom);
+}
 
 function drawGalaxy(zoom){
   const rand = mulberry32(99);
 
-  if ( zoom < 0 ){ 
-    zoom = 0.5 
-  } else if( zoom > 500 ){
-    zoom = 500
-  };
-
-   if ( zoom < 1 ){ 
-    STEP = 1 
-  } else if( zoom < 5 ){
-    STEP = 1
-  } else if( zoom < 10 ){
-    STEP = 10
-  } else if( zoom < 50 ){
-    STEP = 100
+  if ( zoom == zoomLevel.LEVEL_5 ){ 
+    STEP = 10;
+  } else if( zoom == zoomLevel.LEVEL_4 ){
+    STEP = 25;
+  } else if( zoom == zoomLevel.LEVEL_3 ){
+    STEP = 50;
+  } else if( zoom == zoomLevel.LEVEL_2 ){
+    STEP = 75;
+  } else if( zoom == zoomLevel.LEVEL_1 ){
+    STEP = 100;
   };
 
   ctx.fillStyle = 'black';
@@ -64,7 +117,11 @@ function drawGalaxy(zoom){
 
     const b = rand() * 255 | 0;
     ctx.fillStyle = `rgb(${b},${b},255)`;
-    ctx.fillRect(x, y, 1.5, 1.5);
+    //ctx.fillRect(x, y, size, size);
+    const rad = size / 2;
+    ctx.beginPath();
+    ctx.arc(x + rad, y + rad, rad, 0, 2 * Math.PI);
+    ctx.fill();
     //starData.push({X: x, Y: y});
   }
   console.log(`Zoom: ${zoom}`);
@@ -109,38 +166,18 @@ window.addEventListener('keydown', e => {
   }
 });
 
+// Bind “+” and “–” to zoomIn/zoomOut:
 window.addEventListener('keydown', e => {
   if (e.key === '+') {
-    ctx.fillStyle = 'black';
-    zoom += STEP;
     e.preventDefault();
-    drawGalaxy(zoom);
+    zoomIn();
   }
 });
-
 window.addEventListener('keydown', e => {
-  if (e.key === '-' && zoom > 10 ) {
-    ctx.fillStyle = 'black';
-    zoom -= STEP;
+  if (e.key === '-') {
     e.preventDefault();
-    drawGalaxy(zoom);
+    zoomOut();
   }
 });
-
-// window.addEventListener('keydown', e => {
-//   ctx.fillStyle = 'black';
-//   switch (e.key) {
-//     case 'ArrowUp': yOffset += STEP; break;
-//     case 'ArrowDown': yOffset -= STEP; break;
-//     case 'ArrowLeft': xOffset += STEP; break;
-//     case 'ArrowRight': xOffset -= STEP; break;
-//     case '+': zoom += 1; break;
-//     case '-': zoom -= 1; break;
-//     default: return;          // ignore all other keys
-//   }
-//   console.log(`Key: ${e.key}, Zoom: ${zoom}, xOff: ${xOffset}, yOff: ${yOffset}`);
-//   e.preventDefault();         // stop page scroll
-//   drawGalaxy();
-// });
 
 drawGalaxy(zoom);
