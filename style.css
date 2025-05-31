@@ -4,7 +4,16 @@
   --light:   #f3f6ff;
   --accent:  #ff4930;
   --max-width: 1200px;
+
+  /* ---- Scroll‑box ---- */
+  .map-container{
+    width:100vw;
+    height:100vh;
+    overflow:auto;                         /* swipe to scroll               */
+    -webkit-overflow-scrolling:touch;      /* iOS momentum scrolling        */
 }
+
+canvas{display:block;}
 
 /* ── Global Reset ───────────────────── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
