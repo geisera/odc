@@ -23,7 +23,8 @@ const zoomLevel = Object.freeze({
   LEVEL_3: 10,
   LEVEL_4: 100,
   LEVEL_5: 1000,
-  LEVEL_6: 10000
+  LEVEL_6: 10000,
+  LEVEL_7: 100000
 });
 
 let xOffset = 0;
@@ -63,6 +64,10 @@ function zoomIn() {
       break;
     case zoomLevel.LEVEL_5:
       newZoom = zoomLevel.LEVEL_6;
+      newSize = 20;
+      break;
+    case zoomLevel.LEVEL_6:
+      newZoom = zoomLevel.LEVEL_7;
       newSize = 100;
       break;
     // LEVEL_5 is max; no change
@@ -82,6 +87,10 @@ function zoomOut() {
   let newSize = size;
 
   switch (zoom) {
+    case zoomLevel.LEVEL_7:
+      newZoom = zoomLevel.LEVEL_6;
+      newSize = 20;
+      break;
     case zoomLevel.LEVEL_6:
       newZoom = zoomLevel.LEVEL_5;
       newSize = 10;
