@@ -134,6 +134,15 @@ section { margin-top: 2rem; }
 .card h3      { font-size: 1.25rem; margin-bottom: .5rem; color: var(--primary); }
 .card p       { font-size: .95rem; opacity: .88; }
 
+/* Icons */
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
 /* ─── Signup ─────────────────────────── */
 #signup { text-align: center; }
 

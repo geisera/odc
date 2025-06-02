@@ -48,7 +48,7 @@ document.getElementById('nav').innerHTML = `
         <h3><em>${subtitle}</em></h3>
     </div>
     <div>
-      <a href="/">HOME</a>  
+      <a href="/"><span class="material-symbols-outlined">home</span></a>  
       <a href="/map.html">MAP</a>
     </div>
   </nav>
