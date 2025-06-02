@@ -8,7 +8,7 @@ const articleList = [
   },
   {
     title: 'Tech Brief',
-    description: 'Rail‑cannons vs laser lances: cost, power, and reload times in deep‑space engagements.',
+    description: 'Rail‑cannons vs lasers: cost, power, and reload times in deep‑space engagements.',
     link: '/article'
   },
   {
@@ -49,7 +49,7 @@ document.getElementById('nav').innerHTML = `
     </div>
     <div>
       <a href="/"><span class="material-symbols-outlined">home</span></a>  
-      <a href="/map.html">MAP</a>
+      <a href="/map.html"><span class="material-symbols-outlined">orbit</span></a>
     </div>
   </nav>
 `;
