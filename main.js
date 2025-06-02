@@ -1,13 +1,16 @@
-// Update the footer year automatically
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('year').textContent = new Date().getFullYear();
-});
+const title = 'Orbital Defense Corps'
+const subtitle = 'The Journal of Military Sicence Fiction'
 
-document.getElementById('nav').innerHTML = `
+document.addEventListener('DOMContentLoaded', () => {
+  // Update the footer year automatically
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Navbar
+  document.getElementById('nav').innerHTML = `
     <nav>
       <div>
-          <h2>Orbital Defense Corps</h2>
-          <h3><em>The Journal of Military Science Fiction</em></h3>
+          <h2>${title}</h2>
+          <h3><em>${subtitle}</em></h3>
       </div>
       <div>
         <a href="/">HOME</a>  
@@ -15,3 +18,6 @@ document.getElementById('nav').innerHTML = `
       </div>
     </nav>
 `;
+});
+
+
