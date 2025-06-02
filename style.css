@@ -146,7 +146,9 @@ section { margin-top: 2rem; }
 /* ─── Signup ─────────────────────────── */
 #signup { text-align: center; }
 
-#signup h2 { font-size: 2rem; margin-bottom: 1rem; }
+#signup h1 { font-size: 2rem; margin-bottom: 1rem; }
+
+#signup h2 { font-size: 1.5rem; margin-bottom: 1rem; }
 
 #signup form {
   display: flex;
