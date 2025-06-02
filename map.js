@@ -144,7 +144,7 @@ function drawGalaxy() {
 
   const arms = 2;
   const stars = 40000;
-  const spread = 4;
+  const spread = 3.9;
   const twist = 0.55;
   const maxR = Math.min(width, height) * zoom;
 
