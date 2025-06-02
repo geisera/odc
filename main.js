@@ -13,7 +13,7 @@ const articleList = [
   },
   {
     title: 'After Action Report',
-    description: 'Lessons from the simulated Siege of Galileo Gate, why timing an EMP strike still matters.',
+    description: 'Lessons from the simulated Siege of Tanhauser Gate, why timing an EMP strike still matters.',
     link: '/article'
   }
 ]
