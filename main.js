@@ -10,9 +10,8 @@ document.getElementById('nav').innerHTML = `
           <h3><em>The Journal of Military Science Fiction</em></h3>
       </div>
       <div>
-          <a href="#articles">Articles</a>
-          <a href="#signup">Subscribe</a>
-          <a href="/map.html">Map</a>
+        <a href="/">HOME</a>  
+        <a href="/map.html">MAP</a>
       </div>
     </nav>
 `;
