@@ -22,8 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Update the footer year automatically
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  
-
   // Article Cards
   const section = document.getElementById('articles');
  

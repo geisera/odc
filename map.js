@@ -18,13 +18,12 @@ const cy = height / 2;
 
 /* --- pan state & settings --- */
 const zoomLevel = Object.freeze({
-  LEVEL_1: 0.5,
-  LEVEL_2: 1.0,
+  LEVEL_1: 1,
+  LEVEL_2: 5,
   LEVEL_3: 10,
   LEVEL_4: 100,
   LEVEL_5: 1000,
   LEVEL_6: 10000,
-  LEVEL_7: 100000
 });
 
 let xOffset = 0;
@@ -48,15 +47,15 @@ function zoomIn() {
   switch (zoom) {
     case zoomLevel.LEVEL_1:
       newZoom = zoomLevel.LEVEL_2;
-      newSize = 1;
+      newSize = 1.;
       break;
     case zoomLevel.LEVEL_2:
       newZoom = zoomLevel.LEVEL_3;
-      newSize = 3;
+      newSize = 2;
       break;
     case zoomLevel.LEVEL_3:
       newZoom = zoomLevel.LEVEL_4;
-      newSize = 5;
+      newSize = 6;
       break;
     case zoomLevel.LEVEL_4:
       newZoom = zoomLevel.LEVEL_5;
@@ -64,11 +63,7 @@ function zoomIn() {
       break;
     case zoomLevel.LEVEL_5:
       newZoom = zoomLevel.LEVEL_6;
-      newSize = 20;
-      break;
-    case zoomLevel.LEVEL_6:
-      newZoom = zoomLevel.LEVEL_7;
-      newSize = 100;
+      newSize = 40;
       break;
     // LEVEL_5 is max; no change
   }
@@ -76,6 +71,7 @@ function zoomIn() {
     adjustOffsetsForZoom(newZoom);
     zoom = newZoom;
     size = newSize;
+    console.log(size);
     updateStep();
     drawGalaxy();
   }
@@ -87,21 +83,17 @@ function zoomOut() {
   let newSize = size;
 
   switch (zoom) {
-    case zoomLevel.LEVEL_7:
-      newZoom = zoomLevel.LEVEL_6;
-      newSize = 20;
-      break;
     case zoomLevel.LEVEL_6:
       newZoom = zoomLevel.LEVEL_5;
       newSize = 10;
       break;
     case zoomLevel.LEVEL_5:
       newZoom = zoomLevel.LEVEL_4;
-      newSize = 5;
+      newSize = 6;
       break;
     case zoomLevel.LEVEL_4:
       newZoom = zoomLevel.LEVEL_3;
-      newSize = 3;
+      newSize = 2;
       break;
     case zoomLevel.LEVEL_3:
       newZoom = zoomLevel.LEVEL_2;
@@ -109,7 +101,7 @@ function zoomOut() {
       break;
     case zoomLevel.LEVEL_2:
       newZoom = zoomLevel.LEVEL_1;
-      newSize = 0.5;
+      newSize = 1;
       break;
     // LEVEL_1 is min; no change
   }
@@ -167,8 +159,6 @@ function drawGalaxy() {
     ctx.fill();
   }
 
-  console.log(`Zoom: ${zoom}`);
-  console.log(`Effective width: ${width * zoom}`);
 }
 
 /* --- arrow-key handling --- */
