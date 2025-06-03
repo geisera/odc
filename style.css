@@ -25,7 +25,7 @@ body {
 
 main {                       
   flex: 1 0 auto;
-   width: 100%;
+  width: 100%;
   max-width: var(--max-width);
   margin: .5rem auto .5rem;
   padding: 0 1rem;
@@ -191,12 +191,20 @@ section { margin-top: 2rem; }
     border:2px solid #334;
     border-radius:8px;
     display:block;
+    
     /* -webkit-tap-highlight-color: rgba(0,0,0,0); iOS / Chrome */
     /* -webkit-touch-callout: none;                iOS save‑image menu */
     /* user-select: none;                          no accidental selection */
     /* touch-action: none;                         stop double‑tap / glow */
     /* outline: none;                              no focus ring */
  }
+
+ #map-view {
+  display: flex;
+  justify-content: center;   /* horizontal center */
+  align-items: center;       /* vertical center */
+  height: 100vh;             /* full viewport height */
+}
 
 
 /* ─── Footer ─────────────────────────── */

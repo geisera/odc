@@ -9,7 +9,7 @@ function mulberry32(seed){
 }
 
 /* ---------- galaxy painter ---------- */
-const canvas = document.getElementById('galaxy');
+const canvas = document.getElementById('star-map');
 const ctx = canvas.getContext('2d');
 const width = canvas.width;
 const height = canvas.height;
@@ -159,6 +159,7 @@ function drawGalaxy() {
     ctx.fill();
   }
 
+  console.log(`Zoom: ${zoom}`);
 }
 
 /* --- arrow-key handling --- */

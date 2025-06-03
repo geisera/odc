@@ -9,23 +9,14 @@
 
   <link rel="canonical" href="https://orbitaldefensecorps.com/">
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Orbital Defense Corps">
-  <meta property="og:description" content="Weekly briefings for military science‑fiction aficionados.">
-  <meta property="og:url"         content="https://orbitaldefensecorps.com/">
-  <meta property="og:image"       content="https://orbitaldefensecorps.com/og-card.jpg">
-
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@OrbitalDefense">
-
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,orbit" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -36,11 +27,18 @@
 </header>
 
 <main>
+  
   <!-- Feature Cards -->
-  <section id="articles" class="card-grid"></section>
+   <div class="view" id="news">
+      <section id="articles" class="card-grid"></section>
+   </div>
+   
+  <div class="view" id="map-view" style="display: flex;">
+      <canvas id="star-map" width="650" height="650"></canvas>
+  </div>
 
- <!-- Signup -->
-  <section id="signup">
+   <!-- Signup -->
+  <section class="" id="signup">
     <h1>Your planet needs you!</h1>
     <h2>Join the ODC</h2>
     <p>Get new posts, classified briefings, and launch alerts straight to your inbox.</p>
@@ -58,5 +56,6 @@
 </footer>
 
 <script src="main.js"></script>
+<script src="map.js"></script>
 </body>
 </html>
