@@ -218,11 +218,11 @@ section {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.75rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--light);
   background: #131a25;
   padding: 1rem 1.25rem;
   margin: 2rem 0 1rem;
-  border-left: 6px solid var(--accent);
+  border-left: 6px solid var(--light);
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
