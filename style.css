@@ -118,7 +118,11 @@ nav a:hover {
 }
 
 /* ─── Content ‑ Cards & Sections ────── */
-section { margin-top: 2rem; }
+section { 
+  margin-top: 2rem; 
+  justify-content: center;
+  display: flex;
+}
 
 .card-grid {
   display: grid;
@@ -207,8 +211,22 @@ section { margin-top: 2rem; }
   display: flex;
   justify-content: center;   /* horizontal center */
   align-items: center;       /* vertical center */
-  height: 100vh;             /* full viewport height */
+  /* min-height: 100vh; */
 }
+
+.view-header {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: #131a25;
+  padding: 1rem 1.25rem;
+  margin: 2rem 0 1rem;
+  border-left: 6px solid var(--accent);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 
 
 /* ─── Footer ─────────────────────────── */

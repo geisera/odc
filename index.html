@@ -29,25 +29,18 @@
 <main>
   
   <!-- Feature Cards -->
-   <div class="view" id="news">
-      <section id="articles" class="card-grid"></section>
-   </div>
-   
-  <div class="view" id="map-view" style="display: flex;">
-      <canvas id="star-map" width="650" height="650"></canvas>
+  <div class="view" id="news-view">
+    <div class="view-header">Defense Reports</div>
+    <section id="articles" class="card-grid"></section>
   </div>
-
-   <!-- Signup -->
-  <section class="" id="signup">
-    <h1>Your planet needs you!</h1>
-    <h2>Join the ODC</h2>
-    <p>Get new posts, classified briefings, and launch alerts straight to your inbox.</p>
-    <!-- Replace action with your mail service endpoint -->
-    <form action="YOUR_MAILCHIMP_OR_SUBSTACK_URL" method="post">
-      <input type="email" name="EMAIL" placeholder="you@joinODC.now" required>
-      <button type="submit">Enlist</button>
-    </form>
-  </section>
+   
+  <!-- Star Map -->
+  <div class="view" id="map-view" style="display: none;">
+    <div class="view-header">Star Map</div>
+    <section>
+      <canvas id="star-map" width="650" height="487"></canvas>
+    </section>
+  </div>
 
 </main>
 

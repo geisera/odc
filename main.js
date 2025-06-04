@@ -1,5 +1,5 @@
-const title = 'Orbital Defense Corps'
-const subtitle = 'The Journal of Military Sicence Fiction'
+const title = 'Orbital Defense Corps';
+const subtitle = 'The Journal of Military Sicence Fiction';
 const articleList = [
   {
     title: 'Latest Doctrine',
@@ -16,9 +16,11 @@ const articleList = [
     description: 'Lessons from the simulated Siege of Tanhauser Gate, why timing an EMP strike still matters.',
     link: '/article'
   }
-]
+];
+let viewType;
 
 document.addEventListener('DOMContentLoaded', () => {
+
   // Update the footer year automatically
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -43,12 +45,10 @@ document.getElementById('nav').innerHTML = `
   <nav>
     <div>
         <h2>${title}</h2>
-        <h3><em>${subtitle}</em></h3>
     </div>
     <div>
-      <a href="/">home</a>  
-      <a href="#" data-view="map-view" onclick="viewHandler(this)">Star Map</a>
-      <a href="#" data-view="news" onclick="viewHandler(this)">News</a>
+      <a href="#star-map" data-view="map-view" onclick="viewHandler(this)">Star Map</a>
+      <a href="#news" data-view="news-view" onclick="viewHandler(this)">News</a>
     </div>
   </nav>
 `;
@@ -56,7 +56,7 @@ document.getElementById('nav').innerHTML = `
 /*--------------/ View handler /--------------*/
 function viewHandler(event){
 
-  let viewType = event.getAttribute("data-view");
+  viewType = event.getAttribute("data-view");
   
   let views = document.querySelectorAll('.view');
   views.forEach((view) => {
@@ -65,7 +65,7 @@ function viewHandler(event){
 
   for(let i = 0; i < views.length; i++){
     if( views[i].id === viewType){
-      views[i].style.display = "grid";
+      views[i].style.display = "block";
     }
     
   }

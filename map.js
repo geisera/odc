@@ -11,10 +11,10 @@ function mulberry32(seed){
 /* ---------- galaxy painter ---------- */
 const canvas = document.getElementById('star-map');
 const ctx = canvas.getContext('2d');
-const width = canvas.width;
-const height = canvas.height;
-const cx = width  / 2;
-const cy = height / 2;
+const width = 650; //canvas.width;
+const height = 650; //canvas.height;
+const cx = canvas.width  / 2;
+const cy = canvas.height / 2;
 
 /* --- pan state & settings --- */
 const zoomLevel = Object.freeze({
@@ -115,7 +115,9 @@ function zoomOut() {
 }
 
 function updateStep() {
-  if (zoom === zoomLevel.LEVEL_5) {
+  if (zoom === zoomLevel.LEVEL_6){
+    STEP = 1;
+  } else if (zoom === zoomLevel.LEVEL_5) {
     STEP = 10;
   } else if (zoom === zoomLevel.LEVEL_4) {
     STEP = 25;
@@ -128,7 +130,23 @@ function updateStep() {
   }
 }
 
+// function createImageMap(imageMap) {
+//   let mapHtml = `<map name="stars-map">\n`;
+
+//   imageMap.forEach(element => {
+//       mapHtml += `<area shape="circle" coords="${element.x},${element.y},${size/2}" href="#" />\n`;
+
+//   });
+
+//   mapHtml += `</map>`
+//   console.log(JSON.stringify(mapHtml));
+
+// }
+
+let count;
 function drawGalaxy() {
+  count = 0;
+  let imageMap = [];
   const rand = mulberry32(99);
 
   ctx.fillStyle = 'black';
@@ -151,16 +169,40 @@ function drawGalaxy() {
     const x = cx + r * Math.cos(angle) + xOffset;
     const y = cy + r * Math.sin(angle) + yOffset;
 
+    /* Get only the stars on canvas for image map */
+    // if ((x + (size/2)) >= 0 && (x + (size/2)) <= width && (y + (size/2)) >= 0 && (y + (size/2)) <= height) {
+    //   count++;
+    //   mapx = Math.round(x + (size/2));
+    //   mapy = Math.round(y + (size/2));
+    //   imageMap.push({x:mapx, y:mapy})
+
+    // }
+
     const b = rand() * 255 | 0;
     ctx.fillStyle = `rgb(${b},${b},255)`;
     const rad = size / 2;
     ctx.beginPath();
     ctx.arc(x + rad, y + rad, rad, 0, 2 * Math.PI);
     ctx.fill();
+
+    // Draw a tranparency over the canvas
+    // const img = new Image();
+    // const image = document.getElementById("source");
+    // img.src = '/transparency.png';
+    // ctx.drawImage(img, 0, 0);
   }
 
   console.log(`Zoom: ${zoom}`);
+  if (zoom === zoomLevel.LEVEL_5) {
+  //createImageMapAreas();
+  }
+  // console.log(`On screen: ${count}`);
+  // if ( zoom === zoomLevel.LEVEL_6 && imageMap != [] ){
+  //   createImageMap(imageMap);
+  // }
+
 }
+
 
 /* --- arrow-key handling --- */
 window.addEventListener('keydown', e => {
@@ -207,6 +249,8 @@ canvas.addEventListener('click', e => {
   drawGalaxy();
 });
 
+
 // Initial draw
 updateStep();
 drawGalaxy();
+
