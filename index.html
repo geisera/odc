@@ -1,39 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Orbital Defense Corps | The Journal of Military Science Fiction</title>
-  <meta name="description" content="Orbital Defense Corps delivers weekly doctrine drops, tech briefs, after‑action reports, and battle‑tested reviews for military‑SF fans.">
-
-  <link rel="canonical" href="https://orbitaldefensecorps.com/">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ES6 Module Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
 <header>
-  <div id="nav">NAV</div>
+  <div id="nav"></div>
 </header>
 
 <main>
   
   <!-- Feature Cards -->
-  <div class="view" id="news-view">
-    <div class="view-header">Defense Reports</div>
+  <div id="news-view" class="view" style="display: none">
+    <div class="view-header">Intel Reports</div>
     <section id="articles" class="card-grid"></section>
   </div>
-   
+
   <!-- Star Map -->
   <div class="view" id="map-view" style="display: none;">
     <div class="view-header">Star Map</div>
@@ -44,11 +31,10 @@
 
 </main>
 
-<footer>
+<!-- <footer>
   © <span id="year"></span>  · <a href="https://orbitaldefensecorps.com" class="brand">Orbital Defense Corps</a> · A publication of the Terran Imperium War College · All frequencies monitored
-</footer>
+</footer> -->
 
-<script src="main.js"></script>
-<script src="map.js"></script>
+  <script type="module" src="src/index.js"></script>
 </body>
 </html>
