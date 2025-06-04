@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'news-view', label: 'News' }
   ]);
 
-  setupViewHandler();
   setViewType('news-view'); 
+  setupViewHandler();
+  
 });
