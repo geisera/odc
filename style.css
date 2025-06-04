@@ -2,6 +2,7 @@
   --primary: #1f60ff;
   --dark:    #0d1117;
   --light:   #f3f6ff;
+  --heading: #8eaac9;
   --accent:  #ff4930;
   --max-width: 1200px;
 }
@@ -222,7 +223,7 @@ section {
   background: #131a25;
   padding: 1rem 1.25rem;
   margin: 2rem 0 1rem;
-  border-left: 6px solid var(--light);
+  border-left: 6px solid var(--heading);
   border-radius: 0.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
