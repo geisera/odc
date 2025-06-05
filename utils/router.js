@@ -10,7 +10,7 @@ document.addEventListener('click', (event) => {
 
 const routes = {
     404: { template: "/templates/404.html", title: "", description: "" },
-    "/": { template: "/templates/index.html", module: ["/src/test.js"], title: "", description: "" },
+    "/": { template: "/templates/index.html", module: "/src/test.js", title: "", description: "" },
     "/about": { template: "/templates/about.html", title: "", description: "" },
     "/contact": { template: "/templates/contact.html", title: "", description: "" }
 }
@@ -23,29 +23,27 @@ const route = (event) => {
 }
 
 const locationHandler = async () => {
-  let location = window.location.pathname;
-  if (location === "") location = "/";
-
-  const route = routes[location] || routes[404];
-
-  const html = await fetch(route.template).then(res => res.text());
-  document.getElementById("content").innerHTML = html;
-
-  // Dynamically import all route-specific modules
-  if (route.modules && route.modules.length) {
-    for (const modulePath of route.modules) {
-      try {
-        const module = await import(modulePath);
-        if (typeof module.init === "function") {
-          module.init(); // convention: each module optionally exports an init() function
-        }
-      } catch (err) {
-        console.error(`Error loading module: ${modulePath}`, err);
-      }
+    const location = window.location.pathname;
+    if ( location.length == 0) {
+        location = '/';
     }
-  }
-};
 
+    const route = routes[ location ] || routes[404];
+    const html = await fetch( route.template ).then( (response) => 
+    response.text() );
+
+    document.getElementById('content').innerHTML = html;
+
+     // Dynamically import associated module
+    if (route.module) {
+        try {
+        const module = await import(route.module);
+        if (module.init) module.init(); // Call init if exported
+        } catch (err) {
+        console.error(`Failed to load module for ${location}:`, err);
+        }
+    }
+};
 
 window.onpopstate = locationHandler;
 window.route = route;
