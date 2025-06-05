@@ -4,3 +4,6 @@ window.addEventListener("load", (event) => {
   node.innerHTML = 'INTEL REPORTS';
 
 });
+window.onload = (event) => {
+  console.log("page is fully loaded");
+};
