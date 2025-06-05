@@ -10,7 +10,7 @@ document.addEventListener('click', (event) => {
 
 const routes = {
     404: { template: "/templates/404.html", title: "", description: "" },
-    "/": { template: "/templates/index.html", module: ["src/index.js", "/src/nav.js"], title: "", description: "" },
+    "/": { template: "/templates/index.html", module: ["/src/test.js"], title: "", description: "" },
     "/about": { template: "/templates/about.html", title: "", description: "" },
     "/contact": { template: "/templates/contact.html", title: "", description: "" }
 }
