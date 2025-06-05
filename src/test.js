@@ -1,4 +1,6 @@
-console.log('test-js : EXECUTED!');
+window.addEventListener("load", (event) => {
+  console.log('test-js : EXECUTED!');
+  let node = document.getElementById('test-heading');
+  node.innerHTML = 'INTEL REPORTS';
 
-let node = document.getElementById('test-heading');
-node.innerHTML = 'INTEL REPORTS'
+});
