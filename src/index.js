@@ -5,6 +5,8 @@ import { buildNav, setupViewHandler } from './nav.js';
 import { buildFooter } from './footer.js';
 import { setViewType } from './state.js';
 
+setViewType('news-view'); 
+
 document.addEventListener('DOMContentLoaded', () => {
   insertArticles();
   initGalaxy();
@@ -16,7 +18,5 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'news-view', label: 'News' }
   ]);
 
-  setViewType('news-view'); 
   setupViewHandler();
-  
 });

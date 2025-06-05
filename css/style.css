@@ -18,6 +18,8 @@ body {
   line-height: 1.5;
   color: var(--light);
   background: var(--dark);
+
+  /* NEW: turn the page into a vertical flex stack */
   display: flex;
   flex-direction: column;
 }

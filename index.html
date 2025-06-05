@@ -3,38 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Orbital Defense Corps</title>
+  <title>ES6 Module Project</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <header>
+    <div id="nav"></div>
+  </header>
 
-<header>
-  <div id="nav"></div>
-</header>
+  <main>
+    
+    <!-- Feature Cards -->
+    <div id="news-view" class="view" style="display: block">
+      <div class="view-header">Intel Reports</div>
+      <section id="articles" class="card-grid"></section>
+    </div>
 
-<main>
-  
-  <!-- Feature Cards -->
-  <div id="news-view" class="view" style="display: block">
-    <div class="view-header">Intel Reports</div>
-    <section id="articles" class="card-grid"></section>
+    <!-- Star Map -->
+    <div class="view" id="map-view" style="display: none;">
+      <div class="view-header">Star Map</div>
+      <section>
+        <canvas id="star-map" width="650" height="487"></canvas>
+      </section>
+    </div>
+
+  </main>
+
+  <div class="container">
+    <div id="main">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div id="content"></div>
+    </div>
   </div>
-
-  <!-- Star Map -->
-  <div class="view" id="map-view" style="display: none;">
-    <div class="view-header">Star Map</div>
-    <section>
-      <canvas id="star-map" width="650" height="487"></canvas>
-    </section>
-  </div>
-
-</main>
-
-<!-- <footer>
-  © <span id="year"></span>  · <a href="https://orbitaldefensecorps.com" class="brand">Orbital Defense Corps</a> · A publication of the Terran Imperium War College · All frequencies monitored
-</footer> -->
 
   <script type="module" src="src/index.js"></script>
+  <script type="module" src="utils/router.js"></script>
 </body>
 </html>
