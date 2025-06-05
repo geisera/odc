@@ -5,6 +5,8 @@ import { buildNav, setupViewHandler } from './nav.js';
 import { buildFooter } from './footer.js';
 import { setViewType } from './state.js';
 
+console.log('index-js: EXECUTED!');
+
 setViewType('news-view'); 
 
 document.addEventListener('DOMContentLoaded', () => {
