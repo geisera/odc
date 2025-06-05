@@ -8,15 +8,15 @@ import { setViewType } from './state.js';
 setViewType('news-view'); 
 
 document.addEventListener('DOMContentLoaded', () => {
-  insertArticles();
-  initGalaxy();
-  log('Galaxy initialized');
-  buildFooter();
-
   buildNav('Orbital Defense Corps', [
     { id: 'map-view', label: 'Star Map' },
     { id: 'news-view', label: 'News' }
   ]);
+  
+  insertArticles();
+  initGalaxy();
+  log('Galaxy initialized');
+  buildFooter();
 
   setupViewHandler();
 });
