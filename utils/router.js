@@ -1,3 +1,4 @@
+console.log('URL router called!');
 document.addEventListener('click', (event) => {
     const { target } = event;
     if ( !target.matches('nav a') ) {
