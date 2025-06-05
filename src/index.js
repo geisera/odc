@@ -1,4 +1,4 @@
-import { insertArticles } from '/articles.js';
+import { insertArticles } from './articles.js';
 import { initGalaxy } from './galaxy.js';
 import { log } from './utils.js';
 import { buildNav, setupViewHandler } from './nav.js';
