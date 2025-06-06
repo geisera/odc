@@ -2,46 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ES6 Module Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+  <title>Vanilla-JS SPA Boilerplate</title>
+      <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <header>
-    <div id="nav"></div>
+    <nav>
+        <div class="brand">
+          <h2>ORBITAL DEFENSE CORPS</h2>
+        </div>
+        <div class="links">
+            <a href="/" data-link>HOME</a>
+            <a href="/map" data-link>MAP</a>
+        </div>
+    </nav>
   </header>
-
-  <main>
     
-    <!-- Feature Cards -->
-    <div id="news-view" class="view" style="display: block">
-      <div class="view-header">Intel Reports</div>
-      <section id="articles" class="card-grid"></section>
-    </div>
+    
+    <section id="app"></section>
 
-    <!-- Star Map -->
-    <div class="view" id="map-view" style="display: none;">
-      <div class="view-header">Star Map</div>
-      <section>
-        <canvas id="star-map" width="650" height="487"></canvas>
-      </section>
-    </div>
+    <footer>
+      <p>&copy; <span id="year"></span> <a href="https://orbitaldefensecorps.com" class="brand">Orbital Defense Corps.</a> · A publication of the Terran Imperium War College · All frequencies monitored</p>
+    </footer>
 
-  </main>
-
-  <!-- <div class="container">
-    <div id="main">
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-      </nav>
-      <div id="content"></div>
-    </div>
-  </div> -->
-
-  <script type="module" src="src/index.js"></script>
-  <script type="module" src="utils/router.js"></script>
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
