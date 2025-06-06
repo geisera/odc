@@ -1,7 +1,5 @@
 import { setViewType } from './state.js';
 
-console.log('nav-js: EXECUTED!')
-
 export function buildNav(title, views) {
   const nav = document.createElement('nav');
 
