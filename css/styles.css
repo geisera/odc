@@ -204,7 +204,7 @@ footer {
   text-align: center;
   font-size: .875rem;
   opacity: .7;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
