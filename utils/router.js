@@ -1,51 +1,54 @@
+// utils/router.js
 console.log('URL router called!');
+
 document.addEventListener('click', (event) => {
-    const { target } = event;
-    if ( !target.matches('nav a') ) {
-        return;
-    };
-    event.preventDefault();
-    route(event);
+  const { target } = event;
+  if (!target.matches('nav a')) return;
+  event.preventDefault();
+  route(event);
 });
 
 const routes = {
-    404: { template: "/templates/404.html", title: "", description: "" },
-    "/": { template: "/templates/index.html", module: "/src/index.js", title: "", description: "" },
-    "/about": { template: "/templates/about.html", title: "", description: "" },
-    "/contact": { template: "/templates/contact.html", title: "", description: "" }
-}
+  "/": {
+    template: "/templates/index.html",
+    module:   "/src/index.js",   // ← point at the new index.js
+    title:    "",
+    description: ""
+  },
+  404: {
+    template: "/templates/404.html",
+    module:   null,
+    title:    "Not Found",
+    description: "Page not found."
+  }
+};
 
 const route = (event) => {
-    event = event;
-    event.preventDefault();
-    window.history.pushState( {}, "", event.target.href );
-    locationHandler();
-}
+  event.preventDefault();
+  window.history.pushState({}, "", event.target.href);
+  locationHandler();
+};
 
 const locationHandler = async () => {
-    const location = window.location.pathname;
-    if ( location.length == 0) {
-        location = '/';
+  let loc = window.location.pathname;
+  if (!loc || loc === "") loc = "/";
+
+  const routeConfig = routes[loc] || routes[404];
+  const html = await fetch(routeConfig.template).then(r => r.text());
+
+  document.getElementById('content').innerHTML = html;
+
+  if (routeConfig.module) {
+    try {
+      const module = await import(routeConfig.module);
+      if (module.init) module.init();
+    } catch (err) {
+      console.error(`Failed to load module for ${loc}:`, err);
     }
-
-    const route = routes[ location ] || routes[404];
-    const html = await fetch( route.template ).then( (response) => 
-    response.text() );
-
-    document.getElementById('content').innerHTML = html;
-
-     // Dynamically import associated module
-    if (route.module) {
-        try {
-        const module = await import(route.module);
-        if (module.init) module.init(); // Call init if exported
-        } catch (err) {
-        console.error(`Failed to load module for ${location}:`, err);
-        }
-    }
+  }
 };
 
 window.onpopstate = locationHandler;
-window.route = route;
+window.route      = route;
 
-locationHandler();
+locationHandler();  // initial page‐load render
