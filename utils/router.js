@@ -1,16 +1,9 @@
-/**
- * URL router: on initial page load (and on popstate), it:
- *   1) fetches the appropriate template HTML
- *   2) does innerHTML = fetchedHTML
- *   3) dynamically imports the associated module and calls its init()
- */
+// utils/router.js
+console.log('URL router called!');
 
-console.log("router.js: starting up");
-
-document.addEventListener("click", (event) => {
-  // Only intercept clicks on <a> inside a <nav>
+document.addEventListener('click', (event) => {
   const { target } = event;
-  if (!target.matches("nav a")) return;
+  if (!target.matches('nav a')) return;
   event.preventDefault();
   route(event);
 });
@@ -18,14 +11,16 @@ document.addEventListener("click", (event) => {
 const routes = {
   "/": {
     template: "/templates/index.html",
-    module: "/src/index.js",
+    module:   "/src/index.js",   // ← point at the new index.js
+    title:    "",
+    description: ""
   },
-  // you can add more routes here, e.g.:
-  // "/map": { template: "/templates/map.html", module: "/src/map.js" }
   404: {
     template: "/templates/404.html",
-    module: null,
-  },
+    module:   null,
+    title:    "Not Found",
+    description: "Page not found."
+  }
 };
 
 const route = (event) => {
@@ -39,20 +34,14 @@ const locationHandler = async () => {
   if (!loc || loc === "") loc = "/";
 
   const routeConfig = routes[loc] || routes[404];
-  try {
-    const html = await fetch(routeConfig.template).then((r) => r.text());
-    document.getElementById("content").innerHTML = html;
-  } catch (err) {
-    console.error(`Failed to fetch template for ${loc}:`, err);
-    return;
-  }
+  const html = await fetch(routeConfig.template).then(r => r.text());
+
+  document.getElementById('content').innerHTML = html;
 
   if (routeConfig.module) {
     try {
-      const mod = await import(routeConfig.module);
-      if (mod.init) {
-        mod.init();
-      }
+      const module = await import(routeConfig.module);
+      if (module.init) module.init();
     } catch (err) {
       console.error(`Failed to load module for ${loc}:`, err);
     }
@@ -60,7 +49,6 @@ const locationHandler = async () => {
 };
 
 window.onpopstate = locationHandler;
-window.route = route;
+window.route      = route;
 
-// Initial render
-locationHandler();
+locationHandler();  // initial page‐load render

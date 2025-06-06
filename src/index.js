@@ -1,44 +1,33 @@
-/**
- * This module is “mounted” whenever the “/” route is loaded.
- * Export a single init() that:
- *   • sets the view type
- *   • builds navigation into #nav
- *   • inserts articles into #articles-container
- *   • initializes the galaxy canvas (if any)
- *   • logs a message
- *   • builds a footer
- *   • hooks up any view‐switching logic
- */
-
-import { insertArticles } from "./articles.js";
-import { initGalaxy } from "./galaxy.js";
-import { log } from "./utils.js";
-import { buildNav, setupViewHandler } from "./nav.js";
-import { buildFooter } from "./footer.js";
-import { setViewType } from "./state.js";
+// src/index.js
+import { insertArticles } from './articles.js';
+import { initGalaxy }      from './galaxy.js';
+import { log }             from './utils.js';
+import { buildNav, setupViewHandler } from './nav.js';
+import { buildFooter }     from './footer.js';
+import { setViewType }     from './state.js';
 
 export function init() {
-  console.log("index.js: init() called for /");
+  console.log('index.js init() running…');
 
-  // 1) Let state.js know we’re on “news-view”
-  setViewType("news-view");
+  // (1) Tell your state which “view” this is
+  setViewType('news-view');
 
-  // 2) Build <nav> into <div id="nav"></div>
-  buildNav("Orbital Defense Corps", [
-    { id: "/", label: "News" },
-    { id: "/map", label: "Star Map" },
+  // (2) Build the navigation bar 
+  buildNav('Orbital Defense Corps', [
+    { id: 'map-view',   label: 'Star Map' },
+    { id: 'news-view',  label: 'News' }
   ]);
 
-  // 3) Fill #articles-container inside templates/index.html
+  // (3) Insert the news articles into the newly‐inserted HTML
   insertArticles();
 
-  // 4) Initialize the galaxy canvas (if there is one on this view)
+  // (4) Kick off the galaxy canvas if that exists on this view
   initGalaxy();
-  log("Galaxy initialized");
+  log('Galaxy initialized');
 
-  // 5) Build the footer
+  // (5) Build the footer 
   buildFooter();
 
-  // 6) Hook up any “view change” logic if needed
+  // (6) Wire up any “view toggle” handlers after injection
   setupViewHandler();
 }

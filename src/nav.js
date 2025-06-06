@@ -1,59 +1,41 @@
-/**
- * buildNav(title, items):
- *   • title: string shown at left
- *   • items: array of { id: "/some-path", label: "Display Text" }
- *
- * Fills <div id="nav"></div> with a <nav> element containing links.
- *
- * setupViewHandler() is a stub here: you can wire up any additional
- * client‐side logic to highlight the active view, etc.
- */
+import { setViewType } from './state.js';
 
-export function buildNav(siteTitle, items) {
-  const container = document.getElementById("nav");
-  if (!container) return;
+console.log('nav-js: EXECUTED!')
 
-  // Create a <nav> … </nav>
-  const navEl = document.createElement("nav");
-  navEl.style.padding = "1rem";
-  navEl.style.backgroundColor = "#222";
-  navEl.style.color = "#fff";
-  navEl.style.display = "flex";
-  navEl.style.alignItems = "center";
-  navEl.style.justifyContent = "space-between";
+export function buildNav(title, views) {
+  const nav = document.createElement('nav');
 
-  // Left‐side: site title
-  const titleEl = document.createElement("div");
-  titleEl.textContent = siteTitle;
-  titleEl.style.fontWeight = "bold";
-  titleEl.style.fontSize = "1.2rem";
-  navEl.appendChild(titleEl);
+  const left = document.createElement('div');
+  const heading = document.createElement('h2');
+  heading.textContent = title;
+  left.appendChild(heading);
 
-  // Right‐side: links
-  const linksContainer = document.createElement("div");
-  items.forEach((item) => {
-    const link = document.createElement("a");
-    link.href = item.id;
-    link.textContent = item.label;
-    link.style.color = "#fff";
-    link.style.marginLeft = "1rem";
-    link.style.textDecoration = "none";
-    link.style.fontSize = "1rem";
-    link.addEventListener("mouseenter", () => {
-      link.style.opacity = "0.7";
-    });
-    link.addEventListener("mouseleave", () => {
-      link.style.opacity = "1";
-    });
-    linksContainer.appendChild(link);
+  const right = document.createElement('div');
+  views.forEach(view => {
+    const link = document.createElement('a');
+    link.href = `#${view.id}`;
+    link.dataset.view = view.id;
+    link.textContent = view.label;
+    right.appendChild(link);
   });
-  navEl.appendChild(linksContainer);
 
-  container.appendChild(navEl);
+  nav.appendChild(left);
+  nav.appendChild(right);
+
+  document.getElementById('nav').appendChild(nav);
 }
 
 export function setupViewHandler() {
-  // (Optional) Add logic to highlight the “active” link,
-  // or toggle a mobile‐menu, etc. For now, it’s just a stub.
-  console.log("nav.js: setupViewHandler()");
+  document.addEventListener('click', e => {
+    const link = e.target.closest('a[data-view]');
+    if (!link) return;
+
+    e.preventDefault();
+    const viewType = link.dataset.view;
+    setViewType(viewType);
+
+    document.querySelectorAll('.view').forEach(view => {
+      view.style.display = view.id === viewType ? 'block' : 'none';
+    });
+  });
 }
