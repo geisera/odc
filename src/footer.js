@@ -1,10 +1,21 @@
-export function buildFooter() {
-  const footer = document.getElementById('footer');
-  footer.innerHTML = `
-    <p>&copy; <span id="year"></span> <a href="https://orbitaldefensecorps.com" class="brand">Orbital Defense Corps.</a> · A publication of the Terran Imperium War College · All frequencies monitored</p>
-  `;
-  //document.body.appendChild(footer);
+/**
+ * buildFooter():
+ *   • Finds #footer and injects a simple copyright line.
+ */
 
-  // Set the current year
-  document.getElementById('year').textContent = new Date().getFullYear();
+export function buildFooter() {
+  const container = document.getElementById("footer");
+  if (!container) return;
+
+  const footerEl = document.createElement("div");
+  footerEl.style.padding = "1rem";
+  footerEl.style.textAlign = "center";
+  footerEl.style.color = "#888";
+  footerEl.style.fontSize = "0.9rem";
+
+  const year = new Date().getFullYear();
+  footerEl.innerHTML = `&copy; ${year} Orbital Defense Corps. All rights reserved.`;  
+  container.appendChild(footerEl);
+
+  console.log("footer.js: footer built");
 }

@@ -2,46 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
   <title>Orbital Defense Corps</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <div id="nav"></div>
-  </header>
-
-  <main>
-    
-    <!-- Feature Cards -->
-    <div id="news-view" class="view" style="display: block">
-      <div class="view-header">INTEL REPORTS</div>
-      <section id="articles" class="card-grid"></section>
-    </div>
-
-    <!-- Star Map -->
-    <div class="view" id="map-view" style="display: none;">
-      <div class="view-header">STAR MAP</div>
-      <section>
-        <canvas id="star-map" width="650" height="487"></canvas>
-      </section>
-    </div>
-
-  </main>
-
   <div class="container">
-    <div id="main">
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-      </nav>
-      <div id="content"></div>
-    </div>
+    <!-- Everything will be injected here by router.js -->
+    <div id="content"></div>
   </div>
 
-  <script type="module" src="src/index.js"></script>
-  <script type="module" src="utils/router.js"></script>
+  <!-- The router must be loaded as a module -->
+  <script
+    type="module"
+    src="/utils/router.js"
+  ></script>
 </body>
 </html>
