@@ -1,10 +1,6 @@
- console.log('test-js : EXECUTED!');
-  let node = document.getElementById('test-heading');
-  node.innerHTML = 'INTEL REPORTS';
-  
-  window.addEventListener("readyStateChange", (event) => {
-    console.log('test-js : EXECUTED!');
-    let node = document.getElementById('test-heading');
-    node.innerHTML = 'INTEL REPORTS';
-
-});
+// src/test.js
+export function init() {
+  console.log("test.js :init()");
+  const node = document.getElementById("test-heading");
+  if (node) node.innerHTML = "INTEL REPORTS";
+}
