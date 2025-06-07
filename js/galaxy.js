@@ -246,15 +246,23 @@ export function init() {
     init();
     });
 
-    /* --- touch-to-center handling for mobile --- */
     canvas.addEventListener('touchstart', e => {
         e.preventDefault();
-        const rect  = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        const tX    = touch.clientX - rect.left;
-        const tY    = touch.clientY - rect.top;
-        xOffset += (cx - tX);
-        yOffset += (cy - tY);
+        const rect   = canvas.getBoundingClientRect();
+        const touch  = e.touches[0];
+
+        // figure out how CSS pixels → canvas pixels
+        const scaleX = canvas.width  / rect.width;
+        const scaleY = canvas.height / rect.height;
+
+        // map the touch point into canvas space
+        const x = (touch.clientX - rect.left) * scaleX;
+        const y = (touch.clientY - rect.top)  * scaleY;
+
+        // recenter around the true canvas center
+        xOffset += (cx - x);
+        yOffset += (cy - y);
+
         init();
     });
 
