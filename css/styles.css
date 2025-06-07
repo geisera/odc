@@ -59,30 +59,32 @@ main {
   margin-top: 1rem;
 }
 
-/* ── Header ─────────────────────────────── */
+/* ─── Header ─────────────────────────── */
 header {
   background: linear-gradient(135deg, #041734, #102863 60%, #143c9d);
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem;
   text-align: center;
 }
+
 header h1 {
   font-family: 'Orbitron', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
-  letter-spacing: 0.05em;
-  color: var(--light);
+  letter-spacing: .05em;
 }
+
 header h2 {
   font-family: 'Oxanium', sans-serif;
   font-size: clamp(1.4rem, 3.2vw, 2.25rem);
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: .02em;
   margin-top: 0.75rem;
   color: var(--light);
 }
+
 header p {
   font-size: 1.125rem;
   margin-top: 1rem;
-  opacity: 0.85;
+  opacity: .85;
 }
 
 /* ── Map Container & Canvas ─────────────── */
