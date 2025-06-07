@@ -4,17 +4,25 @@ export function init() {
   const canvas = document.getElementById("star-map");
   const ctx    = canvas.getContext("2d");
 
-  // ── 1) Resize the drawing buffer to match CSS-rendered size ──
+  // ── Resize to fill parent ───────────────────────────────────
   const container = canvas.parentElement;
   canvas.width  = container.clientWidth;
   canvas.height = container.clientHeight;
-
-  const width = canvas.width;
+  const width  = canvas.width;
   const height = canvas.height;
   const cx     = width  / 2;
   const cy     = height / 2;
 
-  // ── 2) Deterministic PRNG ───────────────────────────────────
+  // ── Load overlay image ─────────────────────────────────────
+  // Put your transparent PNG at /images/overlay.png (or adjust path)
+  const overlayImg = new Image();
+  overlayImg.src   = "/images/overlay.png";
+  // When it’s loaded, redraw so if we’re already zoomed in, it appears
+  overlayImg.onload = () => {
+    if (zoom === zoomLevel.LEVEL_6) drawGalaxy();
+  };
+
+  // ── PRNG & state ───────────────────────────────────────────
   function mulberry32(seed) {
     return function() {
       let t = (seed += 0x6D2B79F5);
@@ -24,7 +32,6 @@ export function init() {
     };
   }
 
-  // ── 3) Zoom / pan state & helpers ───────────────────────────
   const zoomLevel = Object.freeze({
     LEVEL_1:    1,
     LEVEL_2:    5,
@@ -33,6 +40,7 @@ export function init() {
     LEVEL_5: 1000,
     LEVEL_6:10000,
   });
+
   let xOffset = 0,
       yOffset = 0,
       zoom    = zoomLevel.LEVEL_1,
@@ -90,8 +98,9 @@ export function init() {
     }
   }
 
-  // ── 4) Draw the galaxy ──────────────────────────────────────
+  // ── The main draw loop ─────────────────────────────────────
   function drawGalaxy() {
+    // 1) clear & paint stars
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, width, height);
 
@@ -118,10 +127,14 @@ export function init() {
       ctx.arc(x + rad, y + rad, rad, 0, 2 * Math.PI);
       ctx.fill();
     }
+
+    // 2) If we’re at max zoom, overlay the image
+    if (zoom === zoomLevel.LEVEL_6 && overlayImg.complete) {
+      ctx.drawImage(overlayImg, 0, 0, width, height);
+    }
   }
 
-  // ── 5) Input handlers ──────────────────────────────────────
-  // Arrow keys + WASD + +/- zoom
+  // ── User input handlers (keys, click, touch) ──────────────
   window.addEventListener("keydown", e => {
     switch (e.key) {
       case "ArrowUp":    case "w": yOffset += STEP; e.preventDefault(); drawGalaxy(); break;
@@ -133,16 +146,12 @@ export function init() {
     }
   });
 
-  // Click-to-center
   canvas.addEventListener("click", e => {
-    const clickX = e.offsetX;
-    const clickY = e.offsetY;
-    xOffset += (cx - clickX);
-    yOffset += (cy - clickY);
+    xOffset += (cx - e.offsetX);
+    yOffset += (cy - e.offsetY);
     drawGalaxy();
   });
 
-  // Touch: single-tap to center, double-tap to zoom
   let lastTap = 0, singleTapTimer;
   canvas.addEventListener("touchstart", e => {
     e.preventDefault();
@@ -167,7 +176,7 @@ export function init() {
     lastTap = now;
   });
 
-  // ── 6) Kick it off ─────────────────────────────────────────
+  // ── Kick off initial draw ─────────────────────────────────
   updateStep();
   drawGalaxy();
 }
