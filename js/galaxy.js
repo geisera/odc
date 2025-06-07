@@ -246,25 +246,36 @@ export function init() {
     init();
     });
 
-    canvas.addEventListener('touchstart', e => {
-        e.preventDefault();
-        const rect   = canvas.getBoundingClientRect();
-        const touch  = e.touches[0];
+   let lastTapTime = 0;
+let singleTapTimer;
 
-        // figure out how CSS pixels → canvas pixels
-        const scaleX = canvas.width  / rect.width;
-        const scaleY = canvas.height / rect.height;
+canvas.addEventListener("touchstart", e => {
+  e.preventDefault();
+  const now = Date.now();
 
-        // map the touch point into canvas space
-        const x = (touch.clientX - rect.left) * scaleX;
-        const y = (touch.clientY - rect.top)  * scaleY;
+  // get the first touch point
+  const touch = e.touches[0];
+  const rect  = canvas.getBoundingClientRect();
+  const scaleX = canvas.width  / rect.width;
+  const scaleY = canvas.height / rect.height;
+  const x = (touch.clientX - rect.left) * scaleX;
+  const y = (touch.clientY - rect.top)  * scaleY;
 
-        // recenter around the true canvas center
-        xOffset += (cx - x);
-        yOffset += (cy - y);
+  if (now - lastTapTime < 300) {
+    // Double-tap detected
+    clearTimeout(singleTapTimer);
+    zoomIn();      // call your zoom-in routine
+  } else {
+    // Potential single tap → schedule recenter after delay
+    singleTapTimer = setTimeout(() => {
+      xOffset += (cx - x);
+      yOffset += (cy - y);
+      init();       // redraw centered
+    }, 300);
+  }
 
-        init();
-    });
+  lastTapTime = now;
+});
 
 
 // Initial draw
