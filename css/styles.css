@@ -1,202 +1,146 @@
-/* Container inside each “view” */
-#app {
-  /* max-width: 800px;
-  min-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  border-radius: 4px; */
-}
+/* styles.css */
 
+/* ── CSS Variables ───────────────────────── */
 :root {
-  --primary: #1f60ff;
-  --dark:    #0d1117;
-  --light:   #f3f6ff;
-  --heading: #8eaac9;
-  --accent:  #ff4930;
+  --primary:   #1f60ff;
+  --dark:      #0d1117;
+  --light:     #f3f6ff;
+  --heading:   #8eaac9;
+  --accent:    #ff4930;
   --max-width: 1200px;
 }
 
-/* ── Global Reset ───────────────────── */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Global Reset ───────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-/* ── Sticky‑footer Flex Layout ───────── */
-html, body { height: 100%; }
-
+/* ── Page Layout ────────────────────────── */
+html, body {
+  height: 100%;
+}
 body {
+  display: flex;
+  flex-direction: column;
   font-family: 'Roboto', sans-serif;
   line-height: 1.5;
   color: var(--light);
   background: var(--dark);
-
-  /* NEW: turn the page into a vertical flex stack */
-  display: flex;
-  flex-direction: column;
 }
-
-main {                       
+#app {
   flex: 1 0 auto;
   width: 100%;
   max-width: var(--max-width);
-  margin: 0rem auto .5rem;
+  margin: 1rem auto;
   padding: 0 1rem;
 }
 
-/* ─── Header ─────────────────────────── */
-header {
-  background: linear-gradient(135deg, #041734, #102863 60%, #143c9d);
-  padding: 0.5rem 0.5rem 0.5rem;
-  text-align: center;
+/* ── Navigation Bar ─────────────────────── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #141c2f;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+}
+nav .brand {
+  font-weight: bold;
+  color: var(--primary);
+}
+nav .links a {
+  color: #ccc;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+nav .links a:hover {
+  color: var(--accent);
 }
 
+/* ── Main Content ───────────────────────── */
+main {
+  margin-top: 1rem;
+}
+
+/* ── Header ─────────────────────────────── */
+header {
+  background: linear-gradient(135deg, #041734, #102863 60%, #143c9d);
+  padding: 0.5rem;
+  text-align: center;
+}
 header h1 {
   font-family: 'Orbitron', sans-serif;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
+  color: var(--light);
 }
-
 header h2 {
   font-family: 'Oxanium', sans-serif;
   font-size: clamp(1.4rem, 3.2vw, 2.25rem);
   font-weight: 400;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   margin-top: 0.75rem;
   color: var(--light);
 }
-
 header p {
   font-size: 1.125rem;
   margin-top: 1rem;
-  opacity: .85;
+  opacity: 0.85;
 }
 
-hr {
-    margin-top: 2rem;
-}
-
-canvas {
-  border: 1px solid #333;
-  border-radius: 10px;
-  min-width: none;
-  max-width: 100%;
-}
-
+/* ── Map Container & Canvas ─────────────── */
 .map-container {
+  width: 100%;
+  aspect-ratio: 2 / 1; /* adjust as desired */
+  margin: 1rem 0;
   display: flex;
-  justify-content: center; /* horizontal centering */
-  /* align-items: center;   optional: vertical centering if you give .map-container a fixed height */
-  width: 100%;             /* make it fill its parent */
-  margin: 1rem 0;          /* optional spacing above/below */
+}
+.map-container canvas {
+  flex: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #334;
+  border-radius: 8px;
+  touch-action: none;
 }
 
-#star-map {
-  display: block;     /* so margin auto works if you prefer that approach */
-  max-width: 100%;    /* never exceed its container’s width */
-  height: auto;       /* preserve aspect ratio */
-}
-
-/* ── NAV BAR ────────────────────────────────────────────────────────── */
-nav {
-  background: linear-gradient(135deg, var(--dark-bg), var(--dark-mid) 60%, var(--dark-light));
-  padding: 0.5rem 1rem;
+/* ── Cards & Sections ───────────────────── */
+section {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-nav > div:first-child {
-  /* title + subtitle container */
-  display: flex;
-  flex-direction: column;
-  color: var(--light);
-}
-
-nav > div:first-child h2 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: .05em;
-  margin: 0;
-}
-
-nav > div:first-child h3 {
-  font-family: 'Oxanium', sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: .02em;
-  margin: 0;
-  opacity: .85;
-}
-
-nav > div:last-child {
-  /* links container */
-  display: flex;
-  gap: 2rem;
-}
-
-nav a {
-  text-decoration: none;
-  color: var(--light);
-  font-weight: 700;
-  transition: color .2s ease;
-}
-
-nav a:hover {
-  color: var(--accent);
-}
-
-/* ─── Content ‑ Cards & Sections ────── */
-section { 
-  margin-bottom: 2rem; 
   justify-content: center;
-  display: flex;
+  margin-bottom: 2rem;
 }
-
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5rem; 
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
 }
-
 .card {
   background: #131a25;
   border-radius: 1rem;
   padding: 2rem 1.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, .3);
-  transition: transform .25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+.card p {
+  font-size: 0.95rem;
+  opacity: 0.88;
 }
 
-.card:hover   { transform: translateY(-4px); }
-.card h3      { font-size: 1.25rem; margin-bottom: .5rem; color: var(--primary); }
-.card p       { font-size: .95rem; opacity: .88; }
-
-.galaxy {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#galaxy {
-    border:2px solid #334;
-    border-radius:8px;
-    display:block;
-    
-    /* -webkit-tap-highlight-color: rgba(0,0,0,0); iOS / Chrome */
-    /* -webkit-touch-callout: none;                iOS save‑image menu */
-    /* user-select: none;                          no accidental selection */
-    /* touch-action: none;                         stop double‑tap / glow */
-    /* outline: none;                              no focus ring */
- }
-
- #map-view {
-  display: flex;
-  justify-content: center;   /* horizontal center */
-  align-items: center;       /* vertical center */
-  /* min-height: 100vh; */
-  max-width: 100%; 
-  min-width: 800px; 
-}
-
+/* ── View Header ────────────────────────── */
 .view-header {
   font-family: 'Orbitron', sans-serif;
   font-size: 1.75rem;
@@ -210,22 +154,16 @@ section {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-
-
-/* ─── Footer ─────────────────────────── */
+/* ── Footer ─────────────────────────────── */
 footer {
-  background: #0b0e15;
+  margin-top: auto;
   padding: 2rem 1rem;
   text-align: center;
-  font-size: .875rem;
-  opacity: .7;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  font-size: 0.875rem;
+  opacity: 0.7;
+  background: #0b0e15;
 }
-
-a.brand {
+footer a.brand {
   color: var(--primary);
   font-weight: 700;
   text-decoration: none;
