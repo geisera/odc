@@ -30,27 +30,53 @@ body {
   padding: 0 1rem; */
 }
 
-/* ── Navigation Bar ─────────────────────── */
+/* ── NAV BAR ────────────────────────────────────────────────────────── */
 nav {
+  background: linear-gradient(135deg, var(--dark-bg), var(--dark-mid) 60%, var(--dark-light));
+  padding: 0.5rem 1rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #141c2f;
-  padding: 0.75rem 1rem;
-  border-radius: 4px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-nav .brand {
-  font-weight: bold;
-  color: var(--primary);
+
+nav > div:first-child {
+  /* title + subtitle container */
+  display: flex;
+  flex-direction: column;
+  color: var(--light);
 }
-nav .links a {
-  color: #ccc;
-  margin-left: 1rem;
+
+nav > div:first-child h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: .05em;
+  margin: 0;
+}
+
+nav > div:first-child h3 {
+  font-family: 'Oxanium', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .02em;
+  margin: 0;
+  opacity: .85;
+}
+
+nav > div:last-child {
+  /* links container */
+  display: flex;
+  gap: 2rem;
+}
+
+nav a {
   text-decoration: none;
+  color: var(--light);
   font-weight: 700;
-  transition: color 0.2s ease;
+  transition: color .2s ease;
 }
-nav .links a:hover {
+
+nav a:hover {
   color: var(--accent);
 }
 
