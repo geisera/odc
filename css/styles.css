@@ -21,12 +21,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* ── Sticky‑footer Flex Layout ───────── */
-html, body { 
-  height: 100%; 
-  /* stop Safari & IE from auto-adjusting text size */
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-}
+html, body { height: 100%; }
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -78,11 +73,26 @@ header p {
 hr {
     margin-top: 2rem;
 }
+
 canvas {
   border: 1px solid #333;
   border-radius: 10px;
   min-width: none;
   max-width: 100%;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center; /* horizontal centering */
+  /* align-items: center;   optional: vertical centering if you give .map-container a fixed height */
+  width: 100%;             /* make it fill its parent */
+  margin: 1rem 0;          /* optional spacing above/below */
+}
+
+#star-map {
+  display: block;     /* so margin auto works if you prefer that approach */
+  max-width: 100%;    /* never exceed its container’s width */
+  height: auto;       /* preserve aspect ratio */
 }
 
 /* ── NAV BAR ────────────────────────────────────────────────────────── */
@@ -209,7 +219,7 @@ footer {
   text-align: center;
   font-size: .875rem;
   opacity: .7;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
