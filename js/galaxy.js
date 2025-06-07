@@ -246,6 +246,18 @@ export function init() {
     init();
     });
 
+    /* --- touch-to-center handling for mobile --- */
+    canvas.addEventListener('touchstart', e => {
+        e.preventDefault();
+        const rect  = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        const tX    = touch.clientX - rect.left;
+        const tY    = touch.clientY - rect.top;
+        xOffset += (cx - tX);
+        yOffset += (cy - tY);
+        init();
+    });
+
 
 // Initial draw
 updateStep();
