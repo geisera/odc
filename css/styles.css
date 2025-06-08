@@ -116,7 +116,6 @@ header p {
 /* ── Map Container & Canvas ─────────────── */
 .map-container {
   width: 100%;
-  aspect-ratio: 2 / 1; /* adjust as desired */
   margin: 1rem 0;
   display: flex;
 }

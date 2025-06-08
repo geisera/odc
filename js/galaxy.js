@@ -1,6 +1,8 @@
 // js/galaxy.js
+import { test } from './helper.js';
 
 export function init() {
+  
   const canvas = document.getElementById("star-map");
   const ctx    = canvas.getContext("2d");
 
@@ -16,11 +18,10 @@ export function init() {
   // ── Load overlay image ─────────────────────────────────────
   // Put your transparent PNG at /images/overlay.png (or adjust path)
   const overlayImg = new Image();
-  overlayImg.src   = "/images/overlay.png";
-  // When it’s loaded, redraw so if we’re already zoomed in, it appears
-  overlayImg.onload = () => {
-    if (zoom === zoomLevel.LEVEL_6) drawGalaxy();
-  };
+  overlayImg.src = "/images/overlay.png";
+  overlayImg.is = "overlay";
+  overlayImg.useMap = "overlay";
+
 
   // ── PRNG & state ───────────────────────────────────────────
   function mulberry32(seed) {
@@ -100,7 +101,6 @@ export function init() {
 
   // ── The main draw loop ─────────────────────────────────────
   function drawGalaxy() {
-    // 1) clear & paint stars
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, width, height);
 
@@ -111,6 +111,8 @@ export function init() {
     const twist  = 0.55;
     const maxR   = Math.min(width, height) * zoom;
 
+    let starData = [];
+    
     for (let i = 0; i < stars; i++) {
       const arm   = i % arms;
       const t     = rand();
@@ -124,25 +126,49 @@ export function init() {
 
       ctx.fillStyle = `rgb(${b},${b},255)`;
       ctx.beginPath();
-      ctx.arc(x + rad, y + rad, rad, 0, 2 * Math.PI);
+      ctx.arc(x, y, rad, 0, 2 * Math.PI);
       ctx.fill();
+
+      if (zoom === zoomLevel.LEVEL_6){
+        if(x > 0 && x < canvas.width){
+          if(y > 0 && y < canvas.height){
+            let mapx = Math.round(x);
+            let mapy = Math.round(y);
+            let galacticX = x - xOffset;
+            let galacticY = y - yOffset;
+
+            galacticX = Math.round(galacticX);
+            galacticY = Math.round(galacticY);
+            
+            starData.push({x : mapx, y : mapy, galacticX: galacticX, galacticY: galacticY});
+           
+          } 
+           
+        }
+       
+      }
+      
     }
+    test(starData);
+    // if (zoom === zoomLevel.LEVEL_6){console.log(starData);};
 
     // 2) If we’re at max zoom, overlay the image
     if (zoom === zoomLevel.LEVEL_6 && overlayImg.complete) {
       ctx.drawImage(overlayImg, 0, 0, width, height);
+      
+
     }
   }
 
   // ── User input handlers (keys, click, touch) ──────────────
   window.addEventListener("keydown", e => {
     switch (e.key) {
-      case "ArrowUp":    case "w": yOffset += STEP; e.preventDefault(); drawGalaxy(); break;
-      case "ArrowDown":  case "x": yOffset -= STEP; e.preventDefault(); drawGalaxy(); break;
-      case "ArrowLeft":  case "a": xOffset += STEP; e.preventDefault(); drawGalaxy(); break;
+      case "ArrowUp": case "w": yOffset += STEP; e.preventDefault(); drawGalaxy(); break;
+      case "ArrowDown": case "x": yOffset -= STEP; e.preventDefault(); drawGalaxy(); break;
+      case "ArrowLeft": case "a": xOffset += STEP; e.preventDefault(); drawGalaxy(); break;
       case "ArrowRight": case "d": xOffset -= STEP; e.preventDefault(); drawGalaxy(); break;
-      case "+": case "=":             e.preventDefault(); zoomIn();  break;
-      case "-": case "_":             e.preventDefault(); zoomOut(); break;
+      case "+": case "=": e.preventDefault(); zoomIn();  break;
+      case "-": case "_": e.preventDefault(); zoomOut(); break;
     }
   });
 
