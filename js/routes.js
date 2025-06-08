@@ -26,7 +26,7 @@ export const routes = {
   "/map": {
     template: "templates/map.html",
     data: {
-      title: "Star Map",
+      title: "STAR MAP",
       content:
         "Star Map...",
     },
