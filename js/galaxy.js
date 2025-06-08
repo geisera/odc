@@ -45,17 +45,17 @@ export function init() {
   let xOffset = 0,
       yOffset = 0,
       zoom    = zoomLevel.LEVEL_1,
-      STEP    = 100,
+      STEP    = canvas.width / 3,
       size    = 1;
 
-  function updateStep() {
-    if      (zoom === zoomLevel.LEVEL_6) STEP = 1;
-    else if (zoom === zoomLevel.LEVEL_5) STEP = 10;
-    else if (zoom === zoomLevel.LEVEL_4) STEP = 25;
-    else if (zoom === zoomLevel.LEVEL_3) STEP = 50;
-    else if (zoom === zoomLevel.LEVEL_2) STEP = 75;
-    else                                  STEP = 100;
-  }
+  // function updateStep() {
+  //   if      (zoom === zoomLevel.LEVEL_6) STEP = 1;
+  //   else if (zoom === zoomLevel.LEVEL_5) STEP = 10;
+  //   else if (zoom === zoomLevel.LEVEL_4) STEP = 25;
+  //   else if (zoom === zoomLevel.LEVEL_3) STEP = 50;
+  //   else if (zoom === zoomLevel.LEVEL_2) STEP = 75;
+  //   else                                  STEP = 100;
+  // }
 
   function adjustOffsetsForZoom(newZoom) {
     const ratio = newZoom / zoom;
@@ -76,7 +76,7 @@ export function init() {
       adjustOffsetsForZoom(newZoom);
       zoom = newZoom;
       size = newSize;
-      updateStep();
+      //updateStep();
       drawGalaxy();
     }
   }
@@ -94,7 +94,7 @@ export function init() {
       adjustOffsetsForZoom(newZoom);
       zoom = newZoom;
       size = newSize;
-      updateStep();
+      //updateStep();
       drawGalaxy();
     }
   }
@@ -203,6 +203,6 @@ export function init() {
   });
 
   // ── Kick off initial draw ─────────────────────────────────
-  updateStep();
+  //updateStep();
   drawGalaxy();
 }
