@@ -1,2 +1,6 @@
 [build]
     publish = "."
+
+[[redirects]]
+    from = "map"
+    to = "/"

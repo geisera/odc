@@ -115,9 +115,10 @@ header p {
 
 /* ── Map Container & Canvas ─────────────── */
 .map-container {
+  position: relative;
   width: 100%;
   margin: 1rem 0;
-  display: flex;
+  display: inline-block;
 }
 .map-container canvas {
   flex: 1;
@@ -127,6 +128,20 @@ header p {
   border: 1px solid #334;
   border-radius: 8px;
   touch-action: none;
+}
+
+#star-map,
+#star-overlay {
+  display: block;            /* remove default inline gaps */
+  width: 800px;              /* 2a. match your canvas dimensions exactly */
+  height: 400px;
+}
+
+#star-overlay {
+  position: absolute;        /* 2b. sit directly on top of the canvas */
+  top: 0;
+  left: 0;
+  z-index: 2;                /* above the canvas */
 }
 
 /* ── Cards & Sections ───────────────────── */

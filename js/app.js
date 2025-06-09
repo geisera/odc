@@ -1,6 +1,10 @@
-// js/app.js
-
 import { routes } from "./routes.js";
+
+  // ── Load overlay image ─────────────────────────────────────
+  // Put your transparent PNG at /images/overlay.png (or adjust path)
+  const overlayImg = new Image();
+  overlayImg.src = "/images/overlay.png";
+  overlayImg.id = "star-overlay";
 
 // ─── UTIL: a very basic templating function ───
 // Replaces occurrences of {{key}} in `templateStr` with data[key].

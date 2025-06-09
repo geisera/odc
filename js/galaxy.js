@@ -19,8 +19,7 @@ export function init() {
   // Put your transparent PNG at /images/overlay.png (or adjust path)
   const overlayImg = new Image();
   overlayImg.src = "/images/overlay.png";
-  overlayImg.is = "overlay";
-  overlayImg.useMap = "overlay";
+  overlayImg.id = "star-overlay";
 
 
   // ── PRNG & state ───────────────────────────────────────────
@@ -130,6 +129,9 @@ export function init() {
       ctx.fill();
 
       if (zoom === zoomLevel.LEVEL_6){
+        document.getElementById('star-overlay').style.visibility = 'visible';
+
+        // draw only the stars that fall on the canvas
         if(x > 0 && x < canvas.width){
           if(y > 0 && y < canvas.height){
             let mapx = Math.round(x);
@@ -140,23 +142,34 @@ export function init() {
             galacticX = Math.round(galacticX);
             galacticY = Math.round(galacticY);
             
-            starData.push({x : mapx, y : mapy, galacticX: galacticX, galacticY: galacticY});
+            starData.push({x : mapx, y : mapy, galacticX: galacticX, galacticY: galacticY, radius: rad});
            
           } 
            
         }
-       
+
+        test(starData);
+
+        // draw a transparent overlay and clickable image map
+        const mapElem = document.getElementById('overlay-map');
+        mapElem.innerHTML = '';
+
+        starData.forEach((star) => {
+          const area = document.createElement('area');
+          area.shape = 'circle';
+          area.coords = [
+            star.x,
+            star.y,
+            star.radius
+          ].join(',');
+          area.href="#";
+          mapElem.appendChild(area);
+        });
+      
+      } else {
+        document.getElementById('star-overlay').style.visibility = 'hidden';
       }
       
-    }
-    test(starData);
-    // if (zoom === zoomLevel.LEVEL_6){console.log(starData);};
-
-    // 2) If we’re at max zoom, overlay the image
-    if (zoom === zoomLevel.LEVEL_6 && overlayImg.complete) {
-      ctx.drawImage(overlayImg, 0, 0, width, height);
-      
-
     }
   }
 
