@@ -6,7 +6,8 @@ import { routes } from "./routes.js";
   overlayImg.src = "/images/overlay.png";
   overlayImg.id = "star-overlay";
 
-// ─── UTIL: a very basic templating function ───
+// a very basic templating function
+
 // Replaces occurrences of {{key}} in `templateStr` with data[key].
 function renderTemplate(templateStr, data = {}) {
   return templateStr.replace(/{{\s*(\w+)\s*}}/g, (match, p1) => {
