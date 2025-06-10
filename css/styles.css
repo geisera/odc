@@ -23,6 +23,25 @@ body {
   background: var(--dark);
 }
 
+p {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1rem;
+}
+
+li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+
 /* ── NAV BAR ────────────────────────────────────────────────────────── */
 nav {
   background: linear-gradient(135deg, var(--dark-bg), var(--dark-mid) 60%, var(--dark-light));
