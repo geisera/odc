@@ -1,6 +1,6 @@
 export const routes = {
   "/": {
-    template: "templates/intro.html",
+    template: "templates/template.html",
     data: {
       title: "HOME",
       heading: "Home",
