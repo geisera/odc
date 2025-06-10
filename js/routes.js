@@ -1,4 +1,4 @@
-import { Test } from '.components/test.js';
+import { Test } from './components/test.js';
 
 export const routes = {
   "/": {
