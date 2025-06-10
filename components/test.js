@@ -1,24 +1,12 @@
 export const Test = `
-<div id="sol-defense-corps-pamphlet" class="pamphlet">
-  <h1>Answer the Call: Join the Sol Defense Corps</h1>
-  <p>Seek glory. Safeguard the Imperium. Stand against the chaos beyond our sun.</p>
-
-  <h2>Your Mission:</h2>
-  <ul>
-    <li><strong>Protect</strong> every colony under our shining star</li>
-    <li><strong>Explore</strong> uncharted systems and claim new frontiers</li>
-    <li><strong>Triumph</strong> in battle and earn your place among legends</li>
-  </ul>
-
-  <h2>Your Rewards:</h2>
-  <ul>
-    <li>Elite training with cutting-edge weaponry</li>
-    <li>Rank advancement and generous stipends</li>
-    <li>Brotherhood and honor that outlasts a lifetime</li>
-  </ul>
-
-  <p><em>Delay is defeat. The Imperium depends on your courage.</em></p>
-  <p><strong>Enlist Today at Your Nearest Recruitment Center.</strong></p>
-</div>
+    <div>
+        <p><strong>Join the Sol Defense Corps</strong></p>
+        <p>Heroes Wanted</p>
+        <p>Brave volunteers sought for daring missions beyond Earth’s horizon. Facing uncertainty, risk, and unimaginable discoveries. Expect hardships, long voyages, and encounters that challenge the spirit and test resolve. Safe return uncertain.</p>
+        <p>Rewards include honor, the camaraderie of fellow pioneers, and the everlasting gratitude of humanity.</p>
+        <p>Glory awaits those who answer the call of duty.</p>
+        <p>Safe return uncertain.</p>
+        <p><strong>Ask your recruiter if o have what it takes.</strong></p>
+    </div>
 
 `;
