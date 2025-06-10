@@ -26,7 +26,7 @@ export const routes = {
         </ul>
 
         <p>
-            Enlist. Advance. Dominate. <em>For Sol, for humanity, for victory!</em>
+            Enlist. Advance. Dominate. <em>For Sol, for humanity, for victory!!!!!</em>
         </p>`,
     },
   },
