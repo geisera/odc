@@ -126,13 +126,13 @@ header p {
 }
 
 /* ── Map Container & Canvas ─────────────── */
-.map-container {
+.container {
   position: relative;
   width: 100%;
   margin: 1rem 0;
   display: inline-block;
 }
-.map-container canvas {
+.container canvas {
   flex: 1;
   display: block;
   width: 100%;
