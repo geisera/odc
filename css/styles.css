@@ -13,6 +13,7 @@
 
 /* ── Page Layout ────────────────────────── */
 html, body { height: 100%; }
+
 body {
   display: flex;
   flex-direction: column;
@@ -20,14 +21,6 @@ body {
   line-height: 1.5;
   color: var(--light);
   background: var(--dark);
-}
-
-#app {
-  /* flex: 1 0 auto;
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 1rem auto;
-  padding: 0 1rem; */
 }
 
 /* ── NAV BAR ────────────────────────────────────────────────────────── */
