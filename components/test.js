@@ -7,6 +7,7 @@ export const Test = `
         <p>Glory awaits those who answer the call of duty.</p>
         <p>Safe return uncertain.</p>
         <p><strong>Contact your recruiter to find out if you have what it takes.</strong></p>
+        <p><em>Solis Supra Omnia!</em></p>
     </div>
 
 `;
