@@ -5,7 +5,7 @@ export const routes = {
     template: "templates/template.html",
     data: {
       title: "HOME",
-      heading: "Home",
+      heading: "Heroes Wanted!",
       content: Propaganda,
     },
   },
