@@ -1,4 +1,4 @@
-export const Test = `
+export const Propaganda = `
     <div class="container">
         <p><bold>Join the Sol Defense Corps</bold></p>
         <p>Heroes Wanted</p>

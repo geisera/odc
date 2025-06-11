@@ -1,4 +1,4 @@
-import { Test } from '/components/test.js';
+import { Propaganda } from '/components/Propaganda.js';
 
 export const routes = {
   "/": {
@@ -6,7 +6,7 @@ export const routes = {
     data: {
       title: "HOME",
       heading: "Home",
-      content: Test,
+      content: Propaganda,
     },
   },
   "/about": {
